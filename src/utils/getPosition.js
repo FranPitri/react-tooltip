@@ -29,8 +29,8 @@ export default function(e, target, node, place, desiredPlace, effect, offset) {
   );
   const { extraOffsetX, extraOffsetY } = calculateOffset(offset);
 
-  const windowWidth = window.innerWidth;
-  const windowHeight = window.innerHeight;
+  // const windowWidth = window.innerWidth;
+  // const windowHeight = window.innerHeight;
 
   const { parentTop, parentLeft } = getParent(node);
 
@@ -39,18 +39,18 @@ export default function(e, target, node, place, desiredPlace, effect, offset) {
     const offsetX = defaultOffset[place].l;
     return mouseX + offsetX + extraOffsetX;
   };
-  const getTipOffsetRight = place => {
-    const offsetX = defaultOffset[place].r;
-    return mouseX + offsetX + extraOffsetX;
-  };
+  // const getTipOffsetRight = place => {
+  //   const offsetX = defaultOffset[place].r;
+  //   return mouseX + offsetX + extraOffsetX;
+  // };
   const getTipOffsetTop = place => {
     const offsetY = defaultOffset[place].t;
     return mouseY + offsetY + extraOffsetY;
   };
-  const getTipOffsetBottom = place => {
-    const offsetY = defaultOffset[place].b;
-    return mouseY + offsetY + extraOffsetY;
-  };
+  // const getTipOffsetBottom = place => {
+  //   const offsetY = defaultOffset[place].b;
+  //   return mouseY + offsetY + extraOffsetY;
+  // };
 
   //
   // Functions to test whether the tooltip's sides are inside
@@ -66,42 +66,42 @@ export default function(e, target, node, place, desiredPlace, effect, offset) {
   //       |
   //  Bottom side
   //
-  const outsideLeft = p => getTipOffsetLeft(p) < 0;
-  const outsideRight = p => getTipOffsetRight(p) > windowWidth;
-  const outsideTop = p => getTipOffsetTop(p) < 0;
-  const outsideBottom = p => getTipOffsetBottom(p) > windowHeight;
+  // const outsideLeft = p => getTipOffsetLeft(p) < 0;
+  // const outsideRight = p => getTipOffsetRight(p) > windowWidth;
+  // const outsideTop = p => getTipOffsetTop(p) < 0;
+  // const outsideBottom = p => getTipOffsetBottom(p) > windowHeight;
 
   // Check whether the tooltip with orientation p is completely inside the client window
-  const outside = p =>
-    outsideLeft(p) || outsideRight(p) || outsideTop(p) || outsideBottom(p);
-  const inside = p => !outside(p);
+  // const outside = p =>
+  //   outsideLeft(p) || outsideRight(p) || outsideTop(p) || outsideBottom(p);
+  // const inside = p => !outside(p);
 
-  const placesList = ['top', 'bottom', 'left', 'right'];
-  const insideList = [];
-  for (let i = 0; i < 4; i++) {
-    const p = placesList[i];
-    if (inside(p)) {
-      insideList.push(p);
-    }
-  }
+  // const placesList = ['top', 'bottom', 'left', 'right'];
+  // const insideList = [];
+  // for (let i = 0; i < 4; i++) {
+  //   const p = placesList[i];
+  //   if (inside(p)) {
+  //   insideList.push(p);
+  //   }
+  // }
 
-  let isNewState = false;
-  let newPlace;
-  const shouldUpdatePlace = desiredPlace !== place;
-  if (inside(desiredPlace) && shouldUpdatePlace) {
-    isNewState = true;
-    newPlace = desiredPlace;
-  } else if (insideList.length > 0 && outside(desiredPlace) && outside(place)) {
-    isNewState = true;
-    newPlace = insideList[0];
-  }
+  // let isNewState = false;
+  // let newPlace;
+  // const shouldUpdatePlace = desiredPlace !== place;
+  // if (inside(desiredPlace) && shouldUpdatePlace) {
+  //   isNewState = true;
+  //   newPlace = desiredPlace;
+  // } else if (insideList.length > 0 && outside(desiredPlace) && outside(place)) {
+  //   isNewState = true;
+  //   newPlace = insideList[0];
+  // }
 
-  if (isNewState) {
-    return {
-      isNewState: true,
-      newState: { place: newPlace }
-    };
-  }
+  // if (isNewState) {
+  //   return {
+  //     isNewState: true,
+  //     newState: { place: newPlace }
+  //   };
+  // }
 
   return {
     isNewState: false,
